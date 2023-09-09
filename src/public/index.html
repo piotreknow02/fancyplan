@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fancyplan</title>
+</head>
+<body>
+    <h1>Fancyplan</h1>
+    <h4>Make your plan fancy</h4>
+    <form onsubmit="handleForm">
+        <label for="url">Your lesson plan url: </label>
+        <input id="url" type="text">
+        <input type="submit" value="Fancify!">
+    </form>
+    <script>
+        const urlInput = document.querySelector("#url")
+
+        function handleForm() {
+            window.location.href = `/plan/${encodeURIComponent(urlInput.value)}`
+        }
+    </script>
+</body>
+</html>

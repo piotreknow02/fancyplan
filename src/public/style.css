@@ -1,0 +1,108 @@
+body {
+    background-color: #1f1f1f;
+    color: #000000;
+    font: 11px verdana, sans-serif;
+    overflow: auto;
+    margin: 0;
+}
+
+.tabtytul {
+    /* tabelka z grafiką (nagłówek) */
+    background-color: #00262e;
+    border-bottom: 2px solid #ffffff;
+}
+
+.tytul {
+    /* komórka z tytułem */
+    background-color: #00072a;
+    color: #ffffff;
+    height: 80px;
+    font: bold 36px verdana, sans-serif;
+    border-bottom: 2px solid #ffffff;
+    text-align: center;
+}
+
+.tytulnapis {
+    /* tytuł strony z cieniem (tylko IE) */
+    padding-left: 10px;
+    width: 400px;
+    height: 60px;
+}
+
+.tabela {
+    /* tabela z planem */
+    border-color: #ffffff;
+}
+
+body > div {
+    color: #ffffff;
+}
+
+td {
+    font-size: 11px;
+}
+
+th {
+    background-color: #424242;
+    color: #eeeeee;
+    font-size: 13px
+}
+
+td.g {
+    /* godzina */
+    background-color: #424242;
+    color: #eeeeee;
+    font-weight: bold;
+    vertical-align: top;
+    text-align: center;
+    white-space: nowrap;
+}
+
+td.nr {
+    /* numer lekcji */
+    background-color: #001051;
+    color: #eeeeee;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: top;
+}
+
+td.l {
+    /* lekcja */
+    background-color: #202020;
+    color: #000000;
+    vertical-align: top;
+}
+
+a.n {
+    /* nauczyciel */
+    color: #eeeeee;
+}
+
+a.s {
+    /* sala */
+    color: #eeeeee;
+}
+
+a.k {
+    /* klasa */
+    color: #eeeeee;
+}
+
+.p {
+    /* przedmiot */
+    color: #e0fffd;
+    font-weight: bold;
+}
+
+.op {
+    /* napis */
+    font: 10px verdana, sans-serif;
+}
+
+@media print {
+    .tabtytul {
+        /* nagłówek do druku */
+        display: none;
+    }
+}
