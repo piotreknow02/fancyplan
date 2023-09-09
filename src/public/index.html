@@ -8,17 +8,16 @@
 <body>
     <h1>Fancyplan</h1>
     <h4>Make your plan fancy</h4>
-    <form onsubmit="handleForm">
-        <label for="url">Your lesson plan url: </label>
-        <input id="url" type="text">
-        <input type="submit" value="Fancify!">
-    </form>
+    <label for="url">Your lesson plan url: </label>
+    <input id="url" type="text">
+    <button>Fancify</button>
     <script>
         const urlInput = document.querySelector("#url")
-
-        function handleForm() {
+        function loadPlan(e) {
+            console.log(urlInput.value)
             window.location.href = `/plan/${encodeURIComponent(urlInput.value)}`
         }
+        document.querySelector("button").addEventListener('click', loadPlan)
     </script>
 </body>
 </html>
