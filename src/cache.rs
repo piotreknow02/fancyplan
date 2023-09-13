@@ -1,4 +1,4 @@
-use redis::{Client, Connection, cmd, Commands};
+use redis::{Client, Connection, Commands};
 use anyhow::{Result, Ok};
 
 const CACHE_LIFETIME: usize = 3600; // seconds
