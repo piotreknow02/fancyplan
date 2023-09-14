@@ -17,7 +17,7 @@ impl Upgrader {
         let remap = |e: &mut Selection<'_>| {
             let attribute = e.attr("src").unwrap().to_string();
             if attribute.starts_with("..") {
-                let new_path = attribute.replace("..", &self.domain);
+                let new_path = attribute.replace("..", format!("{}/plan", self.domain.as_str()).as_str());
                 e.set_attr("src", &new_path);
             }
             if attribute.starts_with("/") {
@@ -26,8 +26,9 @@ impl Upgrader {
             }
         };
         
-        remap(&mut self.document.select("img"));
-        remap(&mut self.document.select("script"));
+        for mut el in self.document.select("img, script").iter() {
+            remap(&mut el);
+        }
         Ok(())
     }
 
