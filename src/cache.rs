@@ -3,11 +3,11 @@ use anyhow::{Result, Ok};
 
 const CACHE_LIFETIME: usize = 3600; // seconds
 
-pub struct CachePrivoder {
+pub struct CacheProvider {
     connection: Connection,
 } 
 
-impl CachePrivoder {
+impl CacheProvider {
     pub fn from_dsn(dsn: &str) -> Result<Self> {
         let client = Client::open(dsn)?;
         let conn = client.get_connection()?;

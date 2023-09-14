@@ -8,7 +8,7 @@ use url::Url;
 use crate::{
     upgrader::Upgrader,
     scraper::get_plan,
-    cache::CachePrivoder
+    cache::CacheProvider
 };
 
 
@@ -18,7 +18,7 @@ pub async fn index() -> impl Responder {
 }
 
 #[get("/plan/{url}")]
-pub async fn plan(path: web::Path<String>, data: Data<Arc<Mutex<Option<CachePrivoder>>>>) -> impl Responder {
+pub async fn plan(path: web::Path<String>, data: Data<Arc<Mutex<Option<CacheProvider>>>>) -> impl Responder {
     let url = path.into_inner();
     let mut was_cached = true;
 
