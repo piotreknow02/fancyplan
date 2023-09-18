@@ -1,6 +1,6 @@
 use std::io::{Error, ErrorKind};
 use nipper::Document;
-use anyhow::Result;
+use anyhow::{Result, Ok};
 use url::Url;
 
 pub struct Upgrader {
@@ -46,7 +46,16 @@ impl Upgrader {
         Ok(())
     }
 
+    fn remove_conflicting_scripts(&mut self) -> Result<()> {
+        let conflicting = self.document.select(r#"script[src$="dobrazmiana.js"]"#);
+        for mut elem in conflicting.iter() {
+            elem.remove();
+        }
+        Ok(())
+    }
+
     pub fn default_transformations(&mut self) -> Result<()> {
+        self.remove_conflicting_scripts()?;
         self.remap_images_and_scripts()?;
         self.add_style()?;
         self.add_timer()?;
