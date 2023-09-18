@@ -17,3 +17,6 @@ Cargo.lock
 # Added by cargo
 
 /target
+
+# bundled timer script
+src/public/timer.min.js

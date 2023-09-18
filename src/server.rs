@@ -46,9 +46,8 @@ pub async fn plan(path: web::Path<String>, data: Data<Arc<Mutex<Option<CacheProv
 
     let plan_url = Url::parse(&url)
         .expect("url parse error");
-    let plan_domain = format!("{}://{}", plan_url.scheme(), plan_url.domain().unwrap());
 
-    let mut upgrader = Upgrader::new(&plan, &plan_domain)
+    let mut upgrader = Upgrader::new(&plan, plan_url)
         .expect("error parsing plan");
     upgrader.default_transformations()
         .expect("error applying transformations");

@@ -1,33 +1,30 @@
 use std::io::{Error, ErrorKind};
-use nipper::{Document, Selection};
+use nipper::Document;
 use anyhow::Result;
+use url::Url;
 
 pub struct Upgrader {
-    domain: String,
+    link: Url,
     pub document: Document,
 }
 
 impl Upgrader {
-    pub fn new(html: &str, domain: &str) -> Result<Self> {
+    pub fn new(html: &str, link: Url) -> Result<Self> {
         let doc = Document::from(html);
-        Ok(Self { document: doc, domain: String::from(domain) })
+        Ok(Self { document: doc, link: link })
     }
 
     fn remap_images_and_scripts(&mut self) -> Result<()> {
-        let remap = |e: &mut Selection<'_>| {
+        for mut e in self.document.select("img, script").iter() {
             let attribute = e.attr("src").unwrap().to_string();
             if attribute.starts_with("..") {
-                let new_path = attribute.replace("..", format!("{}/plan", self.domain.as_str()).as_str());
+                let new_path = attribute.replace("..", self.link.join("..")?.as_str());
                 e.set_attr("src", &new_path);
             }
             if attribute.starts_with("/") {
-                let new_path = format!("{}{}", self.domain, &attribute);
+                let new_path = format!("{}://{}{}", self.link.scheme(), self.link.domain().unwrap(), &attribute);
                 e.set_attr("src", &new_path);
             }
-        };
-        
-        for mut el in self.document.select("img, script").iter() {
-            remap(&mut el);
         }
         Ok(())
     }
@@ -45,7 +42,7 @@ impl Upgrader {
 
     fn add_timer(&mut self) -> Result<()> {
         let mut head_tag = self.document.select("body");
-        head_tag.append_html(r#"<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script><script src="https://zsem.edu.pl/plany/scripts/dobrazmiana.js"></script>"#);
+        head_tag.append_html(format!("<script>{}</script>", include_str!("public/timer.min.js")));
         Ok(())
     }
 
