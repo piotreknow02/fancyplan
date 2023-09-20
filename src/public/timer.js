@@ -14,7 +14,6 @@ const hours = [...document.querySelectorAll("td.g")]
 function updateTimer() {
     const col = chooseColumn()
     const {row, isBreak, time} = chooseHour()
-    console.log(row)
     
     if (row == null) return
 
@@ -38,7 +37,6 @@ function updateTimer() {
     if (row > 0) {
         const lastCell = table.children[0].children[row-1].children[col]
         cleanup(lastCell)
-        console.log(lastCell)
     }
 }
     
@@ -72,7 +70,6 @@ function chooseHour() {
         if (startTime == undefined || endTime == undefined) {
             continue
         }
-        console.log(startTime, endTime)
 
         if (currentTime > endTime) {
             continue
