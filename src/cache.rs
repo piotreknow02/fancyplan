@@ -20,7 +20,7 @@ impl CacheProvider {
     }
 
     pub fn set(&mut self, url: &str, content: &str) -> Result<()> {
-        let _ = self.connection.set_ex(url, content, CACHE_LIFETIME)?;
+        self.connection.set_ex(url, content, CACHE_LIFETIME)?;
         Ok(())
     }
 }

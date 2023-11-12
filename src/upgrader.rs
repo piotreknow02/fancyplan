@@ -11,7 +11,7 @@ pub struct Upgrader {
 impl Upgrader {
     pub fn new(html: &str, link: Url) -> Result<Self> {
         let doc = Document::from(html);
-        Ok(Self { document: doc, link: link })
+        Ok(Self { document: doc, link })
     }
 
     fn remap_images_and_scripts(&mut self) -> Result<()> {
@@ -21,7 +21,7 @@ impl Upgrader {
                 let new_path = attribute.replace("..", self.link.join("..")?.as_str());
                 e.set_attr("src", &new_path);
             }
-            if attribute.starts_with("/") {
+            if attribute.starts_with('/') {
                 let new_path = format!("{}://{}{}", self.link.scheme(), self.link.domain().unwrap(), &attribute);
                 e.set_attr("src", &new_path);
             }
