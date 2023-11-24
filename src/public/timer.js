@@ -50,7 +50,7 @@ function chooseColumn() {
     day = day.charAt(0).toUpperCase() + day.substring(1)
 
     for(const d in days) {
-        if (days[d].innerText.trim() == day) {
+        if (days[d].innerText.trim() === day) {
             return d
         }
     }
@@ -62,17 +62,17 @@ function chooseColumn() {
  * @returns {object} returns object that contains row, isBreak and time to end of lesson or break
  */
 function chooseHour() {
-    let currentTime = new Date()
+    const currentTime = new Date()
     for (const t in hours) {
         const startTime = readDate(hours[t].start)
         const endTime = readDate(hours[t].end)
 
-        if (startTime == undefined || endTime == undefined) {
+        if (startTime === undefined || endTime === undefined) {
             continue
         }
 
         if (currentTime > endTime) {
-            continue
+           continue
         }
         else if (currentTime > startTime) {
             return {row: parseInt(t) + 1, isBreak: false, time: calculateTime(endTime)}
