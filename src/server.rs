@@ -58,7 +58,7 @@ pub async fn plan(path: web::Path<String>, data: Data<Arc<Mutex<Option<CacheProv
         if let Some(cache) = cache_provider {
             cache.set(&url, &output)
                 .expect("error caching data")
-        }    
+        }
     }
     HttpResponse::Ok().body(output)
 }
